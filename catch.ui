@@ -12,6 +12,7 @@
     <child>
       <object class="ttk.Frame" id="frame1">
         <property name="height">500</property>
+        <property name="takefocus">false</property>
         <property name="width">500</property>
         <layout manager="grid">
           <property name="column">0</property>

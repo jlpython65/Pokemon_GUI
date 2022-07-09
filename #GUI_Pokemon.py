@@ -1,7 +1,10 @@
 #!/usr/bin/python3
+import os, random
 import tkinter as tk
 import tkinter.ttk as ttk
 
+image =random.choice(os.listdir(r"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5"))
+image_name = image.replace(".png","" )
 
 class StartApp:
     def __init__(self, master=None):
@@ -9,12 +12,12 @@ class StartApp:
         self.frame2 = tk.Frame(master)
         self.frame1 = ttk.Frame(self.frame2)
         self.pokemon = tk.Label(self.frame1)
-        self.img_Abra = tk.PhotoImage(file=r"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5\Absol.png")
+        self.img_POKEMON = tk.PhotoImage(file=fr"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5\{image}")
         self.pokemon.configure(
             anchor="center", bitmap="error", font="TkTextFont", height=196
         )
         self.pokemon.configure(
-            image=self.img_Abra, justify="center", relief="raised", state="normal"
+            image=self.img_POKEMON, justify="center", relief="raised", state="normal"
         )
         self.pokemon.configure(takefocus=False, text="label1", width=196)
         self.pokemon.pack()
@@ -75,7 +78,7 @@ class CatchApp:
         self.label1 = ttk.Label(self.frame3)
         self.label1.configure(
             takefocus=False,
-            text="Absol has been caught! Would you like to give a nickname?",
+            text=f"{image_name} has been caught! Would you like to give a nickname?",
         )
         self.label1.pack(side="top")
         self.entry2 = ttk.Entry(self.frame3)
