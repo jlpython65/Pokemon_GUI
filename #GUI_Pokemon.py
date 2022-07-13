@@ -44,11 +44,13 @@ class StartApp:
         self.label4.pack(side="top")
         self.frame3.configure(cursor="arrow", height=100, width=200)
         self.frame3.grid(column=0, row=2)
+        self.frame2.configure(height=300, relief="flat", takefocus=False, width=300)
+        self.frame2.grid(column=0, row=0)
         self.frame7 = ttk.Frame(self.frame2)
         self.frame7.configure(width=300)
         self.frame7.grid()
-        self.frame2.configure(height=300, relief="flat", takefocus=False, width=300)
-        self.frame2.grid(column=0, row=0)
+        self.frame2.configure(cursor="arrow", height=300, relief="flat", takefocus=True)
+
 
         # Main widget
         self.mainwindow = self.frame2
@@ -63,7 +65,7 @@ class CatchApp:
         self.frame2 = tk.Frame(master)
         self.frame1 = ttk.Frame(self.frame2)
         self.pokemon = tk.Label(self.frame1)
-        self.img_Absol = tk.PhotoImage(file=r"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5\Absol.png")
+        self.img_Absol = tk.PhotoImage(file=fr"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5\{image}")
         self.pokemon.configure(
             anchor="center", font="TkDefaultFont", height=196, image=self.img_Absol
         )
@@ -85,9 +87,7 @@ class CatchApp:
         self.entry2.pack(side="top")
         self.frame3.configure(cursor="arrow", height=100, width=200)
         self.frame3.grid(column=0, row=2)
-        self.frame7 = ttk.Frame(self.frame2)
-        self.frame7.configure(width=300)
-        self.frame7.grid()
+
         self.frame2.configure(height=300, relief="flat", takefocus=False, width=300)
         self.frame2.grid(column=0, row=0)
 
@@ -97,10 +97,10 @@ class CatchApp:
     def run(self):
         self.mainwindow.mainloop()
 
-
 if __name__ == "__main__":
     root = tk.Tk()
     app = StartApp(root)
     app.button1.bind("<Button>", 
-        lambda e: CatchApp(root))
+        lambda change_root, delete_start: CatchApp(root),app.frame1. destroy()) #picture gets deleted here so attach destroy to a button command 
     app.run()
+    
