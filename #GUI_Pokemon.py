@@ -45,18 +45,13 @@ class StartApp:
         self.frame3.configure(cursor="arrow", height=100, width=200)
         self.frame3.grid(column=0, row=2)
         self.frame2.configure(height=300, relief="flat", takefocus=False, width=300)
-        self.frame2.grid(column=0, row=0)
+        self.frame2.pack()
         self.frame7 = ttk.Frame(self.frame2)
         self.frame7.configure(width=300)
         self.frame7.grid()
         self.frame2.configure(cursor="arrow", height=300, relief="flat", takefocus=True)
 
 
-        # Main widget
-        self.mainwindow = self.frame2
-
-    def run(self):
-        self.mainwindow.mainloop()
 
 
 class CatchApp:
@@ -65,14 +60,14 @@ class CatchApp:
         self.frame2 = tk.Frame(master)
         self.frame1 = ttk.Frame(self.frame2)
         self.pokemon = tk.Label(self.frame1)
-        self.img_Absol = tk.PhotoImage(file=fr"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5\{image}")
+        self.img_Absol = tk.PhotoImage(file=fr"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5\Absol.png")
         self.pokemon.configure(
-            anchor="center", font="TkDefaultFont", height=196, image=self.img_Absol
+            anchor="center", bitmap="error", font="TkTextFont", height=196
         )
         self.pokemon.configure(
-            justify="center", relief="raised", state="normal", takefocus=False
+            image=self.img_Absol, justify="center", relief="raised", state="normal"
         )
-        self.pokemon.configure(text="label1", width=196)
+        self.pokemon.configure(takefocus=False, text="label1", width=196)
         self.pokemon.pack()
         self.frame1.configure(height=500, takefocus=False, width=500)
         self.frame1.grid(column=0, row=0, sticky="n")
@@ -89,18 +84,18 @@ class CatchApp:
         self.frame3.grid(column=0, row=2)
 
         self.frame2.configure(height=300, relief="flat", takefocus=False, width=300)
-        self.frame2.grid(column=0, row=0)
+        self.frame2.pack()
 
-        # Main widget
-        self.mainwindow = self.frame2
 
-    def run(self):
-        self.mainwindow.mainloop()
 
 if __name__ == "__main__":
     root = tk.Tk()
     app = StartApp(root)
-    app.button1.bind("<Button>", 
-        lambda change_root, delete_start: CatchApp(root),app.frame1. destroy()) #picture gets deleted here so attach destroy to a button command 
-    app.run()
+    def start_to_catch():
+        app2 = CatchApp(root)
+        app2.frame2.pack(fill='both',expand=1)
+        app.frame2.forget()
+    app.button1.config(command=start_to_catch) #THAT'S IT. JUST REMOVE THE (). I thought it was because I didn't understand the code. FUCK.
+    root.mainloop()
+
     
