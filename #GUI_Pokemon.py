@@ -6,6 +6,25 @@ import tkinter.ttk as ttk
 image =random.choice(os.listdir(r"C:\Users\JASON LEE\Documents\1Python\Pokemon_Game\Pokemon_Images\gen5"))
 image_name = image.replace(".png","" )
 
+def API():
+    #API_Beeminder
+    import time
+    from pyminder.pyminder import Pyminder
+
+    pyminder = Pyminder(user='Jason Lee', token='7AwyVncx3rLCwAYjJopP')
+    goals = pyminder.get_goals()
+    goal = goals[0]
+    print(goal)
+    
+    now = time.time()
+    yesterday = time.time() - 77760 # .9 of a day = 77760 sec
+    sum_ = goal.get_data_sum(now)
+    yesterday_sum = goal.get_data_sum(yesterday)
+    sess_done = sum_ - yesterday_sum
+    needed = goal.get_needed(now)
+    print(sess_done)
+
+
 class StartApp:
     def __init__(self, master=None):
         # build ui
@@ -51,9 +70,6 @@ class StartApp:
         self.frame7.grid()
         self.frame2.configure(cursor="arrow", height=300, relief="flat", takefocus=True)
 
-
-
-
 class CatchApp:
     def __init__(self, master=None):
         # build ui
@@ -89,13 +105,14 @@ class CatchApp:
 
 
 if __name__ == "__main__":
+    API()
     root = tk.Tk()
     app = StartApp(root)
     def start_to_catch():
         app2 = CatchApp(root)
         app2.frame2.pack(fill='both',expand=1)
         app.frame2.forget()
-    app.button1.config(command=start_to_catch) #THAT'S IT. JUST REMOVE THE (). I thought it was because I didn't understand the code. FUCK.
+    app.button1.config(command=start_to_catch) 
     root.mainloop()
 
     
