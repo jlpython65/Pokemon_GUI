@@ -17,13 +17,18 @@ def API():
     print(goal)
     
     now = time.time()
-    yesterday = time.time() - 77760 # .9 of a day = 77760 sec
+    yesterday = time.time() - 900000 # .9 of a day = 77760 sec
     sum_ = goal.get_data_sum(now)
     yesterday_sum = goal.get_data_sum(yesterday)
     sess_done = sum_ - yesterday_sum
     needed = goal.get_needed(now)
     print(sess_done)
-
+    balls_list = [10,15] 
+    global balls
+    if sess_done == 6:
+        balls = balls_list[0]
+    if sess_done > 6:
+        balls = balls_list[1]
 
 class StartApp:
     def __init__(self, master=None):
@@ -59,7 +64,7 @@ class StartApp:
         )
         self.label3.pack(expand="true", padx=20, side="top")
         self.label4 = ttk.Label(self.frame3)
-        self.label4.configure(text="10x")
+        self.label4.configure(text=f"{balls}x")
         self.label4.pack(side="top")
         self.frame3.configure(cursor="arrow", height=100, width=200)
         self.frame3.grid(column=0, row=2)
